@@ -1,0 +1,146 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <style>
+        .container {
+  background-image: url('temp1.webp');
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.converter {
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 40px;
+  text-align: center;
+  width: 50%;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  font-size: 48px;
+  margin-top: 0;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  color: black;
+}
+
+input[type="number"] {
+  border: none;
+  border-bottom: 2px solid #ccc;
+  font-size: 36px;
+  margin-bottom: 30px;
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-size: 24px;
+  margin-left: 10px;
+  color: black;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+input[type="radio"]:checked + label {
+  background-color: #4CAF50;
+  color: black;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+button {
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 24px;
+  padding: 20px;
+  margin-top: 30px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  background-color: #3e8e41;
+}
+
+#result {
+  font-size: 36px;
+  margin-top: 30px;
+  color: black;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  border: 2px solid #fff;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="converter">
+          <h1>Temperature Converter</h1>
+          <input type="number" id="temperature" placeholder="Enter temperature">
+          <div class="input-group">
+            <input type="radio" name="unit" id="celsius" checked>
+            <label for="celsius">Celsius</label>
+          </div>
+        <div class="input-group">
+          <input type="radio" name="unit" id="fahrenheit">
+          <label for="fahrenheit">Fahrenheit</label>
+        </div>
+        <div class="input-group">
+          <input type="radio" name="unit" id="kelvin">
+          <label for="kelvin">Kelvin</label>
+        </div>
+        <button onclick="convert()">Convert</button>
+        <div class="result" id="result"></div>
+      </div>
+      <script>
+      function convert() {
+      var temperature = parseFloat(document.getElementById("temperature").value);
+      var celsius = document.getElementById("celsius").checked;
+      var fahrenheit = document.getElementById("fahrenheit").checked;
+      var kelvin = document.getElementById("kelvin").checked;
+      var result = document.getElementById("result");
+      
+      if (isNaN(temperature)) {
+      result.innerHTML = "Please enter a valid temperature";
+      return;
+      }
+      
+      if (celsius) {
+      var convertedToFahrenheit = (temperature * 9/5) + 32;
+      var convertedToKelvin = temperature + 273.15;
+      result.innerHTML = temperature + "°C = " + convertedToFahrenheit.toFixed(2) + "°F = " + convertedToKelvin.toFixed(2) + " K";
+      } else if (fahrenheit) {
+      var convertedToCelsius = (temperature - 32) * 5/9;
+      var convertedToKelvin = (temperature + 459.67) * 5/9;
+      result.innerHTML = temperature + "°F = " + convertedToCelsius.toFixed(2) + "°C = " + convertedToKelvin.toFixed(2) + " K";
+      } else if (kelvin) {
+      var convertedToCelsius = temperature - 273.15;
+      var convertedToFahrenheit = (temperature * 9/5) - 459.67;
+      result.innerHTML = temperature + " K = " + convertedToCelsius.toFixed(2) + "°C = " + convertedToFahrenheit.toFixed(2) + "°F";
+      }
+      }
+      
+      </script>
+  
+</body>
+</html>
